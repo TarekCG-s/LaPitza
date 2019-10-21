@@ -1,0 +1,18 @@
+{% extends 'pizza/layout.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="section">
+  <div class="form-section">
+    <form method="POST">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

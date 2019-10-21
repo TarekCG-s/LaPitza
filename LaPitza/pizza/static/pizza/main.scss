@@ -1,0 +1,37 @@
+body {
+  background: url('imgs/pizza-background.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.transparent-layer{
+  position: fixed;
+  height: 100%;
+  width:  100%;
+  background: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.title-section{
+  display: grid;
+  justify-content: center;
+  text-align: center;
+}
+.title-section > h1{
+  color:white;
+  outline-color: red;
+  outline-width: medium;
+}
+.title-section > .buttons{
+
+}
+.btn{
+  margin: 1em;
+  width: 10em;
+}

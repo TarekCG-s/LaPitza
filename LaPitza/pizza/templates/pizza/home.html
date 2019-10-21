@@ -1,0 +1,28 @@
+{% extends 'pizza/layout.html' %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="transparent-layer">
+  <div class="container">
+    <div class="title-section">
+      <h1 style="">LA PITZA</h1
+        {% if user.is_authenticated %}
+          <div class="">
+            <h1>Hello, {{ user.username }}</h1>
+            <a href="{% url 'logout' %}"><button type="button" class="btn btn-primary">Logout</button></a>
+          </div>
+        {% else %}
+          <div class="buttons">
+            <a href="{% url 'login' %}"><button type="button" class="btn btn-primary">Log in</button></a>
+            <a href="{% url 'register' %}"><button type="button" class="btn btn-primary">Register</button></a>
+          </div>
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
