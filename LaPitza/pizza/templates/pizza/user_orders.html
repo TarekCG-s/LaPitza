@@ -1,0 +1,87 @@
+{% extends 'pizza/layout.html' %}
+
+{% block head %}
+  {% load static %}
+  <script src="{% static 'pizza/scripts/handlebars_templates.js' %}" charset="utf-8"></script>
+  <script src="{% static 'pizza/scripts/shopping_cart.js' %}" charset="utf-8"></script>
+  <script src="{% static 'pizza/scripts/main.js' %}" charset="utf-8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+{% endblock %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <input type="hidden" id="username"  value="{{ user.get_username }}">
+  {% else %}
+    <input type="hidden" id="username"  value="">
+  {% endif %}
+  <nav class="navbar navbar-expand-sm navbar-dark bg-lapitza">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">LaPitza</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <ul class="navbar-nav mr-auto">
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'menu' %}">Menu<span class="sr-only">(current)</span></a>
+         </li>
+
+         <li class="nav-item active">
+           <a class="nav-link " href="{% url 'user_orders' %}">My Orders</a>
+         </li>
+       </ul>
+       <ul class="navbar-nav ml-auto">
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+         </li>
+       </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container menu-container">
+    <div class="row justify-content-md-center align-items-center">
+      <h1>My Orders</h1>
+    </div>
+    {% for order in orders %}
+    <div class="row justify-content-md-center align-items-center">
+      <div class="col-sm-auto col-center text-center">
+        <div style="margin:10px" class="card">
+          <div style="background:#581845 !important; color:white;" class="card-header">
+            <div class="d-flex justify-content-between">
+              <div class="">
+                #{{order.order_group.id}} - {{order.order_group.user}} - {{order.order_group.total_price}}$
+              </div>
+              <div class="">
+                {% if order.order_group.status.status == 'Done' %}
+                  <span style="color:green;">{{order.order_group.status.status}}</span>
+                {% else %}
+                  <span style="color:orange;">{{order.order_group.status.status}}</span>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <blockquote class="blockquote mb-0">
+              {% for order_item in order.orders %}
+                <p>{{ order_item.food }} -
+                  {% for topping in order_item.toppings %}
+                  {% endfor %}
+                  {{ order_item.toppings }} - {{ order_item.size }} - {{ order_item.price }}$
+                </p>
+              {% endfor %}
+              <hr>
+              <footer class="blockquote-footer">Date <cite title="Source Title">9 Oct</cite></footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

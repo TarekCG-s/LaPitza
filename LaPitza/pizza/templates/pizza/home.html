@@ -6,23 +6,29 @@
 
 {% block content %}
 
-<div class="transparent-layer">
-  <div class="container">
-    <div class="title-section">
-      <h1 style="">LA PITZA</h1
+<div class="container-fluid">
+  <div class="row justify-content-md-center align-items-center">
+    <div class="col-sm-auto col-center text-center">
+      <h1 style="color:white;">Welcome To LaPitza</h1>
+      <div class="btn-grp text-center">
+
         {% if user.is_authenticated %}
-          <div class="">
-            <h1>Hello, {{ user.username }}</h1>
-            <a href="{% url 'logout' %}"><button type="button" class="btn btn-primary">Logout</button></a>
-          </div>
+        <h4 style="color:white;">How is your day {{ user.username }}?</h4>
+        <div class="text-center">
+          <a href="{% url 'menu' %}"><button style="margin-right:4px;" type="button" class="btn btn-warning">Menu</button></a>
+          <a href="{% url 'logout' %}"><button style="margin-left:4px;" type="button" class="btn btn-warning">Logout</button></a>
+        </div>
         {% else %}
-          <div class="buttons">
-            <a href="{% url 'login' %}"><button type="button" class="btn btn-primary">Log in</button></a>
-            <a href="{% url 'register' %}"><button type="button" class="btn btn-primary">Register</button></a>
+          <div class="btns-flex">
+            <a style="margin-right:4px;" class = "home-btn" href="{% url 'login' %}"><button type="button" class="btn btn-warning home-btn">Sign In</button></a>
+            <a style="margin-left:4px;" class = "home-btn" href="{% url 'register' %}"><button type="button" class="btn btn-warning home-btn">Register</button></a>
+          </div>
+          <div>
+            <a class = "home-btn" href="{% url 'menu' %}"><button style="margin-top:4px;" type="button" class="btn btn-warning pizza-outline home-btn">Menu</button></a>
           </div>
         {% endif %}
+      </div>
     </div>
   </div>
 </div>
-
 {% endblock %}

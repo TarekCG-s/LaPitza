@@ -2,11 +2,10 @@
 
 {% block head %}
   {% load static %}
-  <script src="{% static 'pizza/handlebars_templates.js' %}" charset="utf-8"></script>
-  <script src="{% static 'pizza/shopping_cart.js' %}" charset="utf-8"></script>
-  <script src="{% static 'pizza/main.js' %}" charset="utf-8"></script>
+  <script src="{% static 'pizza/scripts/handlebars_templates.js' %}" charset="utf-8"></script>
+  <script src="{% static 'pizza/scripts/shopping_cart.js' %}" charset="utf-8"></script>
+  <script src="{% static 'pizza/scripts/menu.js' %}" charset="utf-8"></script>
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-
 {% endblock %}
 
 {% block title %}
@@ -14,38 +13,84 @@
 {% endblock %}
 
 {% block content %}
-<div class="container white-bg">
-  <h1>Menu</h1>
-  <div class="row">
-    <div class="col-2 list">
-      <h3>Categories</h3>
-
-      {% for type in types %}
-        {% if forloop.first %}
-          <div class="category active" data-category="{{type.id}}" data-category_name="{{type}}"> <h6>{{type}}</h6></div>
-        {% else %}
-            <div class="category" data-category="{{type.id}}"> <h6>{{type}}</h6></div>
-        {% endif %}
-      {% endfor %}
-
-    </div>
-    <div class="col list">
-      <div class="item" >
-        <h5>Name</h5>
-        <h5>Small</h5>
-        <h5>Large</h5>
+  {% if user.is_authenticated %}
+    <input type="hidden" id="username"  value="{{ user.get_username }}">
+  {% else %}
+    <input type="hidden" id="username"  value="">
+  {% endif %}
+  <nav class="navbar navbar-expand-sm navbar-dark bg-lapitza">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">LaPitza</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <ul class="navbar-nav mr-auto">
+         <li class="nav-item active">
+           <a class="nav-link" href="{% url 'menu' %}">Menu<span class="sr-only">(current)</span></a>
+         </li>
+         {% if user.is_authenticated %}
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'user_orders' %}">My Orders</a>
+         </li>
+         {% endif %}
+       </ul>
+       <ul class="navbar-nav ml-auto">
+         {% if user.is_authenticated %}
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+         </li>
+         {% else %}
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'login' %}">Login</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'login' %}">Register</a>
+         </li>
+         {% endif %}
+       </ul>
       </div>
-      <div id="items">
-
-      </div>
     </div>
-    <div class="col-3 list">
-      <h3>Cart</h3>
-      <div id="cart">
+  </nav>
 
+  <div class="container menu-container">
+    <div class="row justify-content-md-center align-items-center">
+      <h1>LA PITZA MENU</h1>
+    </div>
+    <div class="row justify-content-md-center align-items-center main-row">
+      <div class=" menu categories list-group col-md-3 text-center" id="list-tab" role="tablist">
+        <h3>Categories</h3><hr>
+        {% for type in types %}
+          {% if forloop.first %}
+            <div class="list-group-item-action item category active" data-toggle="list" data-category="{{type.id}}" data-category_name="{{type}}"> <h5>{{type}}</h5></div>
+          {% else %}
+              <div class=" list-group-item-action item category" data-toggle="list" data-category="{{type.id}}"> <h5>{{type}}</h5></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="col-md-5 text-center menu foodlist">
+        <h3>Food</h3><hr>
+        <div class="row justify-content-md-center align-items-center ">
+          <div class="col-6">
+            <h6>Name</h6>
+          </div>
+          <div class="col">
+            <h6>Small</h6>
+          </div>
+          <div class="col">
+            <h6>Large</h6>
+          </div>
+        </div>
+        <div id="items"></div>
+      </div>
+      <div class="col-md-3 text-center menu shopping-cart">
+        <h3>Cart</h3><hr>
+        <div id="cart">
+          <p>item kza kza kza <button class="btn btn-danger">Remove</button></p>
+          <button class="btn btn-warning">Confirm Order</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 {% endblock %}

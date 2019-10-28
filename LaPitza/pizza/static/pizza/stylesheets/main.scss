@@ -1,0 +1,129 @@
+$purple : #581845 ;
+$yellow : #FFC300 ;
+$gray : #e6e6e6;
+
+body{
+  background: url('../imgs/pizza-background.png');
+}
+
+.container-fluid{
+  background: rgba(0.0, 0.0, 0.0, 0.4);
+  min-height: 100vh;
+  .row{
+    min-height: 100vh !important;
+    .btn-grp{
+      width: 20rem;
+      text-align: center;
+      .home-btn{
+        width: 100%;
+      }
+      .btns-flex{
+        display: flex;
+      }
+    }
+  }
+}
+.container{
+}
+.menu-container{
+  background: $yellow !important;
+  width: 100vw;
+  min-height: 100vh;
+  .menu{
+    background:white;
+    margin: 10px;
+    border-radius: 8px;
+    border: 2px solid $purple;
+  }
+  .main-row{
+    min-height: 100vh;
+    .list-group{
+      display: block;
+    }
+  }
+}
+.categories{
+  padding: 0px;
+  .item {
+    height: 50px;
+    width: 100%;
+    margin: 0;
+    display: grid;
+    align-items: center;
+  }
+  .selected, .active , .item:hover{
+    background: $purple !important;
+    color: white !important;
+    border-radius: 5px;
+  }
+  .item:hover{
+    cursor: pointer;
+  }
+}
+.foodlist{
+  .item{
+    align-items: center;
+  }
+  .item:hover{
+    cursor: pointer;
+    background: $purple;
+    color: white !important;
+    border-radius: 5px;
+  }
+}
+
+.shopping-cart, .foodlist{
+  min-height: 300px;;
+}
+.bg-lapitza{
+  background-color: $purple !important;
+}
+
+.btn-warning{
+  background: $yellow !important;
+  color: $purple !important;
+}
+
+.btn-warning:hover{
+  outline: 1px solid $yellow !important;
+  background: $purple !important;
+  color: $yellow !important;
+}
+.order-box {
+  width: 60vw;
+  min-height: 50vh;
+  left: 20%;
+  top: 25%;
+}
+.confirm-order-box {
+  width: 20vw;
+  min-height: 20vh;
+  left: 40%;
+  top: 40%;
+}
+#pop-up{
+  position: absolute;
+
+  padding: 20px;
+  /* z-index: 1; */
+  background: white;
+  border-radius: 8px;
+  border: 2px solid $purple;
+}
+.col-md-3{
+  padding-left: 15px !important;
+}
+
+.login-col, .register-col{
+  border-radius: 8px;
+  border: 2px solid $purple;
+  padding: 20px;
+  background: white;
+  min-height: 20em;
+}
+.login-col{
+  width: 20em;
+}
+.register-col{
+  width: 30em;
+}

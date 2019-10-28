@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'pizza.apps.PizzaConfig',
     'users.apps.UsersConfig',
+    'phonenumber_field',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',

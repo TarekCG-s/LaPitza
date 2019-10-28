@@ -5,14 +5,42 @@
 {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="section">
-  <div class="form-section">
-    <form method="POST">
-      {% csrf_token %}
-      {{ form|crispy }}
-      <button type="submit">Login</button>
-    </form>
+<nav class="navbar navbar-expand-sm navbar-dark bg-lapitza">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}">LaPitza</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+     <ul class="navbar-nav mr-auto">
+       <li class="nav-item ">
+         <a class="nav-link" href="{% url 'menu' %}">Menu<span class="sr-only">(current)</span></a>
+       </li>
+     </ul>
+     <ul class="navbar-nav ml-auto">
+       <li class="nav-item">
+         <a class="nav-link active" href="{% url 'login' %}">Login</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" href="{% url 'register' %}">Register</a>
+       </li>
+     </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid">
+  <div class="row justify-content-md-center align-items-center">
+    <div class="col-md-auto col-center">
+      <div class="login-col">
+        <form method="post">
+          {% csrf_token %}
+          {{ form|crispy }}
+          <button class="btn btn-warning" type="submit">Login</button>
+        </form>
+        <small>Already have an account? <a href="{% url 'register' %}">Sign Up</a> now.</small>
+      </div>
+    </div>
   </div>
 </div>
-
 {% endblock %}

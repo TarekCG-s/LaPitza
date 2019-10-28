@@ -1,0 +1,132 @@
+body {
+  background: url("../imgs/pizza-background.png");
+}
+
+.container-fluid {
+  background: rgba(0, 0, 0, 0.4);
+  min-height: 100vh;
+}
+.container-fluid .row {
+  min-height: 100vh !important;
+}
+.container-fluid .row .btn-grp {
+  width: 20rem;
+  text-align: center;
+}
+.container-fluid .row .btn-grp .home-btn {
+  width: 100%;
+}
+.container-fluid .row .btn-grp .btns-flex {
+  display: flex;
+}
+
+.menu-container {
+  background: #FFC300 !important;
+  width: 100vw;
+  min-height: 100vh;
+}
+.menu-container .menu {
+  background: white;
+  margin: 10px;
+  border-radius: 8px;
+  border: 2px solid #581845;
+}
+.menu-container .main-row {
+  min-height: 100vh;
+}
+.menu-container .main-row .list-group {
+  display: block;
+}
+
+.categories {
+  padding: 0px;
+}
+.categories .item {
+  height: 50px;
+  width: 100%;
+  margin: 0;
+  display: grid;
+  align-items: center;
+}
+.categories .selected, .categories .active, .categories .item:hover {
+  background: #581845 !important;
+  color: white !important;
+  border-radius: 5px;
+}
+.categories .item:hover {
+  cursor: pointer;
+}
+
+.foodlist .item {
+  align-items: center;
+}
+.foodlist .item:hover {
+  cursor: pointer;
+  background: #581845;
+  color: white !important;
+  border-radius: 5px;
+}
+
+.shopping-cart, .foodlist {
+  min-height: 300px;
+}
+
+.bg-lapitza {
+  background-color: #581845 !important;
+}
+
+.btn-warning {
+  background: #FFC300 !important;
+  color: #581845 !important;
+}
+
+.btn-warning:hover {
+  outline: 1px solid #FFC300 !important;
+  background: #581845 !important;
+  color: #FFC300 !important;
+}
+
+.order-box {
+  width: 60vw;
+  min-height: 50vh;
+  left: 20%;
+  top: 25%;
+}
+
+.confirm-order-box {
+  width: 20vw;
+  min-height: 20vh;
+  left: 40%;
+  top: 40%;
+}
+
+#pop-up {
+  position: absolute;
+  padding: 20px;
+  /* z-index: 1; */
+  background: white;
+  border-radius: 8px;
+  border: 2px solid #581845;
+}
+
+.col-md-3 {
+  padding-left: 15px !important;
+}
+
+.login-col, .register-col {
+  border-radius: 8px;
+  border: 2px solid #581845;
+  padding: 20px;
+  background: white;
+  min-height: 20em;
+}
+
+.login-col {
+  width: 20em;
+}
+
+.register-col {
+  width: 30em;
+}
+
+/*# sourceMappingURL=main.css.map */
