@@ -41,7 +41,7 @@ def address(request):
 @login_required
 def user_orders(request):
     user = User.objects.get(pk=request.user.id)
-    order_groups = Order.objects.filter(user=user)
+    order_groups = Order.objects.filter(user=user).order_by('-id')
     orders=[]
     for order in order_groups:
         order_items = Order_Item.objects.filter(order=order).all()
