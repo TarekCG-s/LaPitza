@@ -58,7 +58,7 @@ function submit_to_card() {
   }
   items_in_cart.push(item);
   close_popup();
-  localStorage.setItem('items_in_cart', items_in_cart);
+  localStorage.setItem(username, JSON.stringify({'items': items_in_cart, 'total':total_price}));
   refresh_cart_items();
   return false;
 }
@@ -114,7 +114,7 @@ function refresh_cart_items(){
     submit.onclick = show_confirm_box;
     cart.append(submit);
   }
-  localStorage.setItem(username, JSON.stringify(items_in_cart));
+  localStorage.setItem(username, JSON.stringify({'items': items_in_cart, 'total':total_price}));
 }
 
 function show_confirm_box(){
@@ -127,12 +127,47 @@ function show_confirm_box(){
     isPopup = true;
 }
 
+function select_address()
+{
+  alert('submitted');
+  window.location.replace("{% url 'address' %}");
+}
+
 function submit_order()
 {
+  let address = get_checked_radio_value('address');
   const xhr = new XMLHttpRequest();
   xhr.open('POST', 'submit_order');
   xhr.setRequestHeader("X-CSRFToken", csrftoken);
-  xhr.send(JSON.stringify({'total_price':total_price, 'orders':items_in_cart}));
+  xhr.send(JSON.stringify({'total_price':total_price, 'orders':items_in_cart, 'address':address}));
   items_in_cart = []
-  refresh_cart_items();
+  total_price = 0;
+  localStorage.setItem(username, JSON.stringify({'items': items_in_cart, 'total':total_price}));
+  window.location.replace('/menu');
+
+  function get_checked_radio_value(name){
+    var elements = document.getElementsByName(name);
+    for(i = 0; i < elements.length; i++) {
+      if(elements[i].checked) {
+        return elements[i].value;
+      }
+    }
+  }
 }
+
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');

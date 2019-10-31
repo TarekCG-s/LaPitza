@@ -3,8 +3,11 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.views import login_required
 from django.contrib.auth.models import User
-from .models import Type, Food, Topping, Status, Order, Order_Item
+from .forms import Address as AddressForm
+from .models import Type, Food, Topping, Status, Order, Order_Item, Address as AddressModel
 import json
+
+
 def index(request):
     return render(request, 'pizza/home.html', context=None)
 
@@ -18,9 +21,27 @@ def menu(request):
     return render(request, 'pizza/menu.html', context=context)
 
 @login_required
+def address(request):
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.user = request.user
+            obj.save()
+            return redirect('address')
+    else:
+        form = AddressForm()
+    addresses = AddressModel.objects.filter(user_id=request.user.id).all()
+    context ={
+        'form':form,
+        'addresses':addresses,
+    }
+    return render(request, 'pizza/address.html', context=context)
+
+@login_required
 def user_orders(request):
     user = User.objects.get(pk=request.user.id)
-    order_groups = Order.objects.filter(user=user).all()
+    order_groups = Order.objects.filter(user=user).order_by('-id')
     orders=[]
     for order in order_groups:
         order_items = Order_Item.objects.filter(order=order).all()
@@ -60,12 +81,11 @@ def get_toppings(request):
 def submit_order(request):
     if request.method == 'POST':
         body = json.loads(request.body)
-        order = Order(user_id=request.user.id, total_price=body['total_price'])
+        order = Order(user_id=request.user.id, total_price=body['total_price'], address_id=body['address'])
         order.save()
-
         for item in body['orders']:
-
             item.setdefault('toppings','')
             order_item = Order_Item(order_id=order.id, food_id=item['foodid'], size=item['size'], price=item['price'], toppings=''.join(item['toppings']))
             order_item.save()
+    print('redirect')
     return redirect('menu')

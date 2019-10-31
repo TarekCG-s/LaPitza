@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () =>{
       <h5>Are you sure you want to submit your order?</h5>
       <br>
       <div class="text-center">
-        <button class="btn btn-warning" name="button" type="submit" onclick="submit_order()">Yes</button>
+        <a class="btn btn-warning" href="/address">Yes</a>
         <button class ="btn btn-danger" id="cancel-btn" onclick="close_popup()">No</button>
       </div>
     </form>

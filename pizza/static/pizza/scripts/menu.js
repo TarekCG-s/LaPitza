@@ -5,9 +5,11 @@ document.addEventListener('DOMContentLoaded', () =>{
   username = document.querySelector('#username').value;
   if(username !== ''){
     if (!localStorage.getItem(username)){
-      localStorage.setItem(username, JSON.stringify(items_in_cart));
+      localStorage.setItem(username, JSON.stringify({'items': items_in_cart, 'total':total_price}));
     }
-    items_in_cart = JSON.parse(localStorage.getItem(username));
+    items_in_cart = JSON.parse(localStorage.getItem(username))['items'];
+    total_price = JSON.parse(localStorage.getItem(username))['total'];
+
   }
 
   refresh_cart_items();
@@ -51,20 +53,3 @@ function get_toppings_ajax() {
   }
   xhr.send();
 }
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-var csrftoken = getCookie('csrftoken');

@@ -3,7 +3,8 @@ $yellow : #FFC300 ;
 $gray : #e6e6e6;
 
 body{
-  background: url('../imgs/pizza-background.png');
+  background: url('../imgs/pizza-background.png') no-repeat;
+  background-size: cover;
 }
 
 .container-fluid{
@@ -36,7 +37,7 @@ body{
     border: 2px solid $purple;
   }
   .main-row{
-    min-height: 100vh;
+    height: fit-content;;
     .list-group{
       display: block;
     }
@@ -102,7 +103,7 @@ body{
   top: 40%;
 }
 #pop-up{
-  position: absolute;
+  position: fixed;
 
   padding: 20px;
   /* z-index: 1; */
@@ -114,7 +115,7 @@ body{
   padding-left: 15px !important;
 }
 
-.login-col, .register-col{
+.login-col, .register-col, .address-col{
   border-radius: 8px;
   border: 2px solid $purple;
   padding: 20px;
@@ -126,4 +127,24 @@ body{
 }
 .register-col{
   width: 30em;
+}
+.address-col{
+  width: 50em;
+}
+
+@media only screen and (max-width: 600px) {
+  .confirm-order-box {
+    width: 50vw;
+    min-height: 20vh;
+    left: 40%;
+    top: 40%;
+  }
+  .order-box {
+    width: 60vw;
+    max-height: 95vh;
+    left: 20%;
+    top: 0;
+    overflow-y: scroll;
+  }
+
 }

@@ -54,7 +54,7 @@
           <div style="background:#581845 !important; color:white;" class="card-header">
             <div class="d-flex justify-content-between">
               <div class="">
-                #{{order.order_group.id}} - {{order.order_group.user}} - {{order.order_group.total_price}}$
+                #{{order.order_group.id}} - {{order.order_group.user}} - {{order.order_group.address}} - {{order.order_group.total_price}}$
               </div>
               <div class="">
                 {% if order.order_group.status.status == 'Done' %}
@@ -75,7 +75,7 @@
                 </p>
               {% endfor %}
               <hr>
-              <footer class="blockquote-footer">Date <cite title="Source Title">9 Oct</cite></footer>
+              <footer class="blockquote-footer"> <cite title="Source Title">{{order.order_group.date}}</cite></footer>
             </blockquote>
           </div>
         </div>

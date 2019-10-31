@@ -7,4 +7,5 @@ urlpatterns = [
     path('toppings', views.get_toppings),
     path('submit_order', views.submit_order),
     path('user_orders', views.user_orders, name='user_orders'),
+    path('address', views.address, name='address'),
 ]

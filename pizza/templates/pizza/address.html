@@ -1,0 +1,95 @@
+{% extends 'pizza/layout.html' %}
+
+{% block head %}
+  {% load static %}
+  {% load crispy_forms_tags %}
+  <script src="{% static 'pizza/scripts/shopping_cart.js' %}" charset="utf-8"></script>
+  <script src="{% static 'pizza/scripts/address.js' %}" charset="utf-8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+{% endblock %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <input type="hidden" id="username"  value="{{ user.get_username }}">
+  {% else %}
+    <input type="hidden" id="username"  value="">
+  {% endif %}
+  <nav class="navbar navbar-expand-sm navbar-dark bg-lapitza">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">LaPitza</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <ul class="navbar-nav mr-auto">
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'menu' %}">Menu<span class="sr-only">(current)</span></a>
+         </li>
+
+         <li class="nav-item">
+           <a class="nav-link " href="{% url 'user_orders' %}">My Orders</a>
+         </li>
+       </ul>
+       <ul class="navbar-nav ml-auto">
+         <li class="nav-item">
+           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+         </li>
+       </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container menu-container">
+
+    <div class="">
+
+    </div>
+      <div class="row justify-content-md-center ">
+        <div class="address-col">
+          <div class="row justify-content-md-center">
+            <div class="col-md-5 ">
+                <form method="POST" action="{% url 'address' %}">
+                  <h3>Add a new address</h3>
+                  {% csrf_token %}
+                  {{ form|crispy }}
+                  <button class="btn btn-info" type="submit">Add Adress</button>
+                </form>
+                <hr>
+
+            </div>
+            <div class="col-md-1">
+
+            </div>
+            <div class="col-md-6 ">
+                <h1>Select your address: </h1>
+                <hr>
+                {% if addresses|length > 0 %}
+                  {% for address in addresses %}
+                  <p></p>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <input type="radio" name="address" value="{{address.id}}" checked>{{ address }}
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  <br>
+                  <button class="btn btn-warning" onclick="submit_order()">Submit Order</button>
+                {% else %}
+                  <p>You don't have any addresses right now. Add a new address to complete the order.</p>
+                {% endif %}
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+  </div>
+
+
+{% endblock %}

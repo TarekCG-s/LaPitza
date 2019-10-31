@@ -42,6 +42,12 @@ class Address(models.Model):
     building_num =  models.CharField(max_length=24)
     phone = PhoneNumberField()
 
+    class Meta:
+        verbose_name_plural = "Addresses"
+
+    def __str__(self):
+        return f'{self.city}, {self.district} - {self.street} - {self.building_num}'
+
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.ForeignKey(Address, on_delete=models.SET_NULL, null=True)
@@ -49,6 +55,7 @@ class Order(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, default=1)
     date = models.DateField(default=datetime.now)
 
+    
     def __str__(self):
         return f'{self.user.username} - {self.address} - {self.total_price}$ - {self.status}'
 
