@@ -46,7 +46,7 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
     def __str__(self):
-        return f'{self.city}, {self.district} - {self.street} - {self.building_num}'
+        return f'{self.street} - {self.building_num} building '
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -55,7 +55,7 @@ class Order(models.Model):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, default=1)
     date = models.DateField(default=datetime.now)
 
-    
+
     def __str__(self):
         return f'{self.user.username} - {self.address} - {self.total_price}$ - {self.status}'
 

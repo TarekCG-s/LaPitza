@@ -105,7 +105,7 @@ function refresh_cart_items(){
       total_price += parseFloat(items_in_cart[i]['price']);
     }
     let total = document.createElement('h6');
-    total.innerHTML = 'Total : ' + total_price;
+    total.innerHTML = 'Total : ' + total_price + '$';
     cart.append(total);
     let submit = document.createElement('button');
     submit.innerHTML = 'Order Now';
