@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECRET_KEY = '614420c65b633a54a47e7ac511f694510b17ecde531cee97'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['lapitza.herokuapp.com','127.0.0.1']
 
